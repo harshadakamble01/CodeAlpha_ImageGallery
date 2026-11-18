@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131c"><title>Wanderlust — World Gallery</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#10131c;color:#f8f7f4;font-family:Arial,Helvetica,sans-serif}
+header{padding:48px 7vw 28px;background:radial-gradient(ellipse at 75% 0%,#3a4160 0,transparent 45%)}
+.kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c7b8a0;font-weight:bold}
+h1{font-family:Georgia,serif;font-size:clamp(42px,8vw,86px);font-weight:400;letter-spacing:-3px;line-height:.98;margin:18px 0}
+h1 em{color:#d8bd91;font-weight:400}.sub{color:#b7bac5;line-height:1.7;max-width:560px;font-size:15px}
+.bar{padding:20px 7vw 28px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.filter{border:1px solid #414656;background:transparent;color:#d8dbe4;padding:10px 17px;border-radius:30px;cursor:pointer;transition:.25s}
+.filter:hover,.filter.active{background:#d8bd91;color:#151923;border-color:#d8bd91}
+#search{margin-left:auto;background:#1b202d;border:1px solid #414656;border-radius:30px;padding:11px 16px;color:#fff;outline:none;min-width:190px}
+.gallery{padding:0 7vw 70px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:205px;gap:16px}
+.tile{position:relative;overflow:hidden;border-radius:15px;background:#252b3a;cursor:pointer;animation:enter .7s both;animation-delay:calc(var(--n)*55ms)}
+.tile:nth-child(6n+1){grid-row:span 2}.tile:nth-child(8n+4){grid-column:span 2}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .5s}
+.tile:hover img{transform:scale(1.12);filter:brightness(.8) saturate(1.15)}
+.tile:after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#090b12e8)}
+.info{position:absolute;z-index:1;bottom:17px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:end;transform:translateY(6px);transition:.35s}
+.tile:hover .info{transform:translateY(0)}.place{font:24px Georgia,serif}.country{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#d8bd91;margin-top:5px}
+.arrow{width:34px;height:34px;border:1px solid #ffffff80;border-radius:50%;display:grid;place-items:center;background:#ffffff20}
+@keyframes enter{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.viewer{position:fixed;inset:0;background:#080a10f2;z-index:5;display:none;align-items:center;justify-content:center;padding:25px;backdrop-filter:blur(12px)}
+.viewer.show{display:flex;animation:fade .25s}.viewer img{max-width:min(100%,1050px);max-height:82vh;object-fit:contain;border-radius:12px;animation:zoom .3s}
+.close,.nav{position:absolute;border:1px solid #ffffff55;background:#ffffff20;color:white;border-radius:50%;width:44px;height:44px;font-size:25px;cursor:pointer}
+.close{right:22px;top:22px}.prev{left:20px}.next{right:20px}.label{position:absolute;bottom:18px;color:#e6dfd2;font:18px Georgia,serif}
+.empty{grid-column:1/-1;text-align:center;padding:55px;color:#b7bac5}
+footer{text-align:center;padding:0 20px 35px;color:#818798;font-size:12px}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes zoom{from{transform:scale(.94);opacity:.5}to{transform:scale(1);opacity:1}}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(3,1fr);grid-auto-rows:175px}}
+@media(max-width:620px){header{padding:34px 5vw 20px}.bar{padding:15px 5vw 22px}.gallery{padding:0 5vw 50px;grid-template-columns:repeat(2,1fr);grid-auto-rows:145px;gap:10px}.tile:nth-child(8n+4){grid-column:span 1}.place{font-size:19px}.info{left:12px;right:12px;bottom:12px}.nav{width:38px;height:38px}.prev{left:7px}.next{right:7px}#search{flex:1;margin-left:0}}
+</style></head>
+<body>
+<header><div class="kicker">✦ The world is waiting</div><h1>Wanderlust <em>Gallery.</em></h1><p class="sub">A visual journey through the world's most beautiful destinations. Find a place that inspires you, and let your imagination travel.</p></header>
+<nav class="bar" aria-label="Filter destinations">
+<button class="filter active" data-filter="all">All places</button><button class="filter" data-filter="asia">Asia</button><button class="filter" data-filter="europe">Europe</button><button class="filter" data-filter="islands">Islands</button><button class="filter" data-filter="cities">Cities</button>
+<input id="search" type="search" placeholder="Search a destination..." aria-label="Search destinations"></nav>
+<main class="gallery" id="gallery">
+<article class="tile" style="--n:1" data-region="asia cities" data-name="Hong Kong"><img src="https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=1000&q=85" alt="Hong Kong city skyline"><div class="info"><div><div class="place">Hong Kong</div><div class="country">China · Asia</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:2" data-region="europe cities" data-name="Paris"><img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1000&q=85" alt="Eiffel Tower in Paris"><div class="info"><div><div class="place">Paris</div><div class="country">France · Europe</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:3" data-region="europe" data-name="Switzerland"><img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1000&q=85" alt="Beautiful alpine landscape"><div class="info"><div><div class="place">Switzerland</div><div class="country">Europe</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:4" data-region="asia" data-name="Japan"><img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1000&q=85" alt="Traditional street in Kyoto Japan"><div class="info"><div><div class="place">Japan</div><div class="country">East Asia</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:5" data-region="europe islands" data-name="Santorini"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1000&q=85" alt="White buildings of Santorini"><div class="info"><div><div class="place">Santorini</div><div class="country">Greece · Europe</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:6" data-region="asia cities" data-name="Dubai"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1000&q=85" alt="Dubai skyline"><div class="info"><div><div class="place">Dubai</div><div class="country">UAE · Middle East</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:7" data-region="islands asia" data-name="Bali"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1000&q=85" alt="Bali tropical temple and greenery"><div class="info"><div><div class="place">Bali</div><div class="country">Indonesia · Asia</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:8" data-region="europe cities" data-name="London"><img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1000&q=85" alt="London city and Big Ben"><div class="info"><div><div class="place">London</div><div class="country">United Kingdom</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:9" data-region="asia cities" data-name="Singapore"><img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1000&q=85" alt="Singapore Marina Bay skyline"><div class="info"><div><div class="place">Singapore</div><div class="country">Southeast Asia</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:10" data-region="europe cities" data-name="Venice"><img src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=1000&q=85" alt="Venice canal and historic buildings"><div class="info"><div><div class="place">Venice</div><div class="country">Italy · Europe</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:11" data-region="cities" data-name="New York"><img src="https://images.unsplash.com/photo-1496588152823-86ff7695e68f?w=1000&q=85" alt="New York skyline"><div class="info"><div><div class="place">New York</div><div class="country">USA · North America</div></div><span class="arrow">↗</span></div></article>
+<article class="tile" style="--n:12" data-region="europe cities" data-name="Rome"><img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=1000&q=85" alt="Colosseum in Rome"><div class="info"><div><div class="place">Rome</div><div class="country">Italy · Europe</div></div><span class="arrow">↗</span></div></article>
+</main><footer>WANDERLUST GALLERY · Made with HTML, CSS & JavaScript</footer>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Destination photo preview"><button class="close" id="close" aria-label="Close">×</button><button class="nav prev" id="prev" aria-label="Previous">‹</button><img id="large" alt=""><button class="nav next" id="next" aria-label="Next">›</button><div class="label" id="label"></div></div>
+<script>
+const tiles=[...document.querySelectorAll('.tile')],buttons=[...document.querySelectorAll('.filter')],search=document.getElementById('search'),viewer=document.getElementById('viewer'),large=document.getElementById('large'),label=document.getElementById('label');let region='all',shown=[],index=0;
+function filter(){let q=search.value.toLowerCase();shown=tiles.filter(t=>(region==='all'||t.dataset.region.split(' ').includes(region))&&t.dataset.name.toLowerCase().includes(q));tiles.forEach(t=>t.style.display=shown.includes(t)?'block':'none');let empty=document.querySelector('.empty');if(!shown.length&&!empty){empty=document.createElement('p');empty.className='empty';empty.textContent='No destination found. Try another search.';document.getElementById('gallery').append(empty)}else if(shown.length&&empty)empty.remove()}
+buttons.forEach(b=>b.addEventListener('click',()=>{buttons.forEach(x=>x.classList.remove('active'));b.classList.add('active');region=b.dataset.filter;filter()}));search.addEventListener('input',filter);
+function openAt(i){if(!shown.length)return;index=(i+shown.length)%shown.length;let t=shown[index];large.src=t.querySelector('img').src;large.alt=t.querySelector('img').alt;label.textContent=t.dataset.name;viewer.classList.add('show')}
+tiles.forEach(t=>t.addEventListener('click',()=>openAt(shown.indexOf(t))));function close(){viewer.classList.remove('show')}
+document.getElementById('close').onclick=close;document.getElementById('prev').onclick=()=>openAt(index-1);document.getElementById('next').onclick=()=>openAt(index+1);viewer.addEventListener('click',e=>{if(e.target===viewer)close()});document.addEventListener('keydown',e=>{if(!viewer.classList.contains('show'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')openAt(index-1);if(e.key==='ArrowRight')openAt(index+1)});filter();
+</script></body></html>
